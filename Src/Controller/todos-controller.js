@@ -22,16 +22,16 @@ export const addTodos = async (req, res) => {
  const {id, task} = req.body; // to get the data from the req body
   try {
     const result = await pool.query("INSERT INTO todos (id, task) VALUES ($1, $2) RETURNING *", [id, task]);
-res.json({
+  res.json({
   message: "To do task added successfully!",
   task: result.rows[0]
-  })
+  });
 } catch (err) {
   res.status(500).json({
     error: err.message
   });
 }
-
+};
 
 // Delete
 export const deleteTodos = async (req, res) =>  {
